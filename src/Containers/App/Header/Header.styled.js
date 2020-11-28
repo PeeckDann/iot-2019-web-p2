@@ -46,11 +46,3 @@ export const NavLink = styled.a`
         border-bottom: solid 5px #FFCC33;
     }
 `;
-
-export const SingUp = styled.button`
-    border: solid 1px white;
-    border-radius: 2px;
-    background-color: #000066;
-    color: white;
-    padding: 5px 20px; 
-`;

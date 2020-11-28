@@ -1,5 +1,6 @@
 import React from "react";
 import {Container, LogoContainer, ShopName, ShopLogo, NavMenu, NavLink, SingUp} from "./Header.styled.js";
+import {Link} from "react-router-dom";
 import ShopLogoIcon from "../../Icons/ShopLogo.svg";
 
 const Header = () => {
@@ -10,9 +11,15 @@ const Header = () => {
                 <ShopName>Shish</ShopName>
             </LogoContainer>
             <NavMenu>
-                <NavLink>Home</NavLink>
-                <NavLink>Products</NavLink>
-                <NavLink>Cart</NavLink>
+                <Link to="/">
+                    <NavLink>Home</NavLink>
+                </Link>
+                <Link to="/catalog">
+                    <NavLink>Catalog</NavLink>
+                </Link>
+                <Link>
+                    <NavLink>Cart</NavLink>
+                </Link>
             </NavMenu>
         </Container>
     );
