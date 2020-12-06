@@ -97,3 +97,13 @@ export const ViewMore = styled.button`
         color: #000033;
     }
 `;
+
+export const ContentContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 6%;
+    margin-top: 6%;
+`;
