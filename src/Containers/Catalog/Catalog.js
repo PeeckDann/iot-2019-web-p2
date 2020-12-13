@@ -3,45 +3,45 @@ import {Container, Products, Product, ProductImage, ProductName, ProductDescript
 import {Link} from "react-router-dom";
 import ProductImageBeta from "../Icons/TileImage.jpeg";
 import FilterMenu from "../../Components/Filters";
-import seafoodListContext from "../../Contexts/Seafood";
+import {getFilteredSeafood} from "../../Connection/Connection.js";
+import Spinner from "../../Components/Spinner.js";
 
 const Catalog = () => {
 
-    const seafoodList = React.useContext(seafoodListContext);
-
-    const [list, setList] = useState(seafoodList);
-    
-    const [searchQuery, setSearchQuery] = useState('');
+    const [seafoodList, setSeafoodList] = useState([]);
+    const [showedSeafood, setShowedSeafood] = useState([]);
     const [typeFilter, setTypeFilter] = useState('None');
     const [countryFilter, setCountryFilter] = useState('None');
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const pattern = new RegExp(searchQuery, 'i');
+        (async function () {
+            setSeafoodList(await getFilteredSeafood(typeFilter, countryFilter));
+        })()
+    }, [typeFilter, countryFilter]);
 
+    useEffect(() => {
+        if (!seafoodList) return;
+        const pattern = new RegExp(searchQuery, 'i');
+        
         let filteredSeafood = seafoodList;
 
-        if (typeFilter !== 'None') {
-            filteredSeafood = filteredSeafood.filter(item => (item.type === typeFilter));
-        }
-
-        if (countryFilter !== 'None') {
-            filteredSeafood = filteredSeafood.filter(item => (item.country === countryFilter));
-        }
-
         if (searchQuery !== '') {
-            filteredSeafood = filteredSeafood.filter(seafood => (pattern.test(seafood.name) || pattern.test(seafood.description)));
+            filteredSeafood = seafoodList.filter(seafood => (pattern.test(seafood.name) ||
+                pattern.test(seafood.description)));
         }
 
-        setList(filteredSeafood);
-    }, [typeFilter, countryFilter, searchQuery, seafoodList]);
+        setShowedSeafood(filteredSeafood);
+    }, [searchQuery, seafoodList]);
 
+    if (!showedSeafood) return <Spinner/>;
     return (
         <Container>
             <FilterMenu type={[typeFilter, setTypeFilter]}
                     country={[countryFilter, setCountryFilter]}
                     search={[searchQuery, setSearchQuery]}/>
             <Products>
-                {list.map((seafood) => 
+                {showedSeafood.map((seafood) => 
                 <Product>
                     <ProductImage src={ProductImageBeta} alt="Image"></ProductImage>
                     <ProductName>{seafood.name}</ProductName>

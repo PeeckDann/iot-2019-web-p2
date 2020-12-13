@@ -9,7 +9,7 @@ function FilterMenu({ type, country, search }) {
         <FilterContainer>
             <Filters>
                 <Label>Filter by:</Label>
-                <CustomSelect options={["Frosen", "Fresh"]} state={type}/>
+                <CustomSelect options={["Frozen", "Fresh"]} state={type}/>
                 <CustomSelect options={["Japan", "Indonesia", "Netherlands"]} state={country}/>
             </Filters>
             <SearchInput state={search}/>

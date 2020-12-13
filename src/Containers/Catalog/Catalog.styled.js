@@ -6,6 +6,7 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    min-height: 288px;
 `;
 
 export const Products = styled.div`

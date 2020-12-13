@@ -1,15 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Container, ProductSection, ProductImage, ProductInfo, Characteristics, Country, Type, ProductName, ProductDescription, BuyOptions, Price, Buttons, GoBack, AddToCart} from "./Item.styled";
-import { Link, useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import ProductIcon from "../Icons/TileImage.jpeg";
-import seafoodListContext from "../../Contexts/Seafood";
+import {getSeafoodById} from "../../Connection/Connection.js";
+import Spinner from "../../Components/Spinner.js";
 
 const Item = () => {
 
-    const seafoodList = React.useContext(seafoodListContext);
-    const {id} = useParams();
-    const seafood = seafoodList.find(seafood => (seafood.id === parseInt(id)));
+    const [seafood, setSeafood] = useState();
 
+    const {id} = useParams();
+
+    useEffect(() => {
+        (async function () {
+            setSeafood(await getSeafoodById(id));
+        })()
+    });
+
+    if (!seafood) return <Spinner/>;
     return(
         <Container>
             <ProductSection>
