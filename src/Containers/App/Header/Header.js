@@ -17,7 +17,7 @@ const Header = () => {
                 <Link to="/catalog">
                     <NavLink>Catalog</NavLink>
                 </Link>
-                <Link>
+                <Link to="/cart">
                     <NavLink>Cart</NavLink>
                 </Link>
             </NavMenu>

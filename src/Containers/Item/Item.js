@@ -4,12 +4,15 @@ import {Link, useParams} from "react-router-dom";
 import ProductIcon from "../Icons/TileImage.jpeg";
 import {getSeafoodById} from "../../Connection/Connection.js";
 import Spinner from "../../Components/Spinner.js";
+import {useDispatch} from 'react-redux';
+import {add} from "../../Store/Actions/Actions.js";
 
 const Item = () => {
 
     const [seafood, setSeafood] = useState();
 
     const {id} = useParams();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         (async function () {
@@ -37,7 +40,7 @@ const Item = () => {
                     <Link to="/catalog">
                         <GoBack>Go Back</GoBack>
                     </Link>
-                    <AddToCart>Add To Cart</AddToCart>
+                    <AddToCart onClick={() => dispatch(add(seafood))}>Add To Cart</AddToCart>
                 </Buttons>
             </BuyOptions>
         </Container>

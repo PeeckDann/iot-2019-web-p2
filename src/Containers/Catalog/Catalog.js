@@ -42,7 +42,7 @@ const Catalog = () => {
                     search={[searchQuery, setSearchQuery]}/>
             <Products>
                 {showedSeafood.map((seafood) => 
-                <Product>
+                <Product key={`Product${seafood.id}`}>
                     <ProductImage src={ProductImageBeta} alt="Image"></ProductImage>
                     <ProductName>{seafood.name}</ProductName>
                     <ProductDescription>{seafood.description}</ProductDescription>

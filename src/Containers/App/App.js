@@ -7,6 +7,7 @@ import Header from "./Header/Header.js";
 import Home from "../Home/Home.js";
 import Catalog from "../Catalog/Catalog.js";
 import Item from "../Item/Item.js";
+import Cart from "../Cart/Cart.js";
 import Footer from "./Footer/Footer.js";
 
 const App = () => {
@@ -22,6 +23,9 @@ const App = () => {
                 </Route>
                 <Route exact path="/item/:id">
                     <Item/>
+                </Route>
+                <Route exact path="/cart">
+                    <Cart/>
                 </Route>
             </Switch>
             <Footer/>

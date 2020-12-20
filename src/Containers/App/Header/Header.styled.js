@@ -36,8 +36,7 @@ export const NavMenu = styled.div`
     margin-right: 35%;
 `;
 
-export const NavLink = styled.a`
-    text-decoration: none;
+export const NavLink = styled.param`
     font-size: 20px;
     color: white;
     cursor: pointer;
