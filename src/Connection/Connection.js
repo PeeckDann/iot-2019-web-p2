@@ -13,7 +13,7 @@ export async function getSeafood() {
 }
 
 export async function getSeafoodById(id) {
-    await delay(3000);
+    await delay(1000);
     return (await instance.get(`/${id}`)).data;
 }
 

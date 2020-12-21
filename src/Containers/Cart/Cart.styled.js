@@ -12,6 +12,7 @@ export const Container = styled.div`
 export const Heading = styled.h1`
     font-size: 30px;
     color: #000033;
+    margin: 4% 0 3% 0;
 `;
 
 export const ItemList = styled.div`
@@ -27,15 +28,45 @@ export const Item = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border: solid 1px #000033;
+    border-radius: 10px;
+    padding: 5px;
+    width: 90%;
+    margin-bottom: 1%;
+`;
+
+export const Image = styled.img`
+    width: 15%;
+    border-radius: 10px;
 `;
 
 export const Name = styled.p`
     font-size: 20px;
+    font-weight: bold;
     color: #000033;
+    margin-right: 30%;
+`;
+
+export const Quantity = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 10%;
+    margin-right: 5%;
 `;
 
 export const Counter = styled.button`
-
+    background-color: white;
+    color: #000033;
+    padding: 3px 10px 4px 10px;
+    border: solid 1px #000033;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover{
+        background-color: #000033;
+        color: white;
+    }
 `;
 
 export const Number = styled.p`
@@ -43,19 +74,30 @@ export const Number = styled.p`
     color: #000033;
 `;
 
-export const Delete = styled.button`
-
-`;
-
 export const Price = styled.p`
     font-size: 16px;
     color: #000033;
+    margin-right: 10%;
+`;
+
+export const Delete = styled.button`
+    background-color: #8A0808;
+    color: white;
+    padding: 3px 10px 4px 10px;
+    border: solid 1px #8A0808;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 3%;
+    &:hover{
+        background-color: #3B0B0B;
+    }
 `;
 
 export const TotalPrice = styled.h1`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #000033;
+    margin: 2% 0 5% 0;
 `;
 
 export const BottomButtons = styled.div`
@@ -63,6 +105,8 @@ export const BottomButtons = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 5%;
+    width: 80%;
 `;
 
 export const ToCatalog = styled.button`
@@ -93,4 +137,9 @@ export const Continue = styled.button`
         background-color: white;
         color: #000033;
     }
+`;
+
+export const Empty = styled.p`
+    font-size: 25px;
+    color: #8A0808;
 `;

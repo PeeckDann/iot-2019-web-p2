@@ -18,7 +18,7 @@ const Item = () => {
         (async function () {
             setSeafood(await getSeafoodById(id));
         })()
-    });
+    }, []);
 
     if (!seafood) return <Spinner/>;
     return(

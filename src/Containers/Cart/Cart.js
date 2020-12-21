@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import {Container,  Heading, ItemList, Item, Name, Counter, Number, Delete, Price, TotalPrice, BottomButtons, ToCatalog, Continue} from "./Cart.styled"
-import Image from "../Icons/TileImage.jpeg";
+import {Container,  Heading, ItemList, Item, Image, Name, Quantity, Counter, Number, Delete, Price, TotalPrice, BottomButtons, ToCatalog, Continue, Empty} from "./Cart.styled"
+import ImageBeta from "../Icons/TileImage.jpeg";
 import {useDispatch} from "react-redux";
 import {remove, increment, decrement} from "../../Store/Actions/Actions.js";
 import {useSelector} from "react-redux";
@@ -20,16 +20,19 @@ const Cart = () => {
     return(
         <Container>
             <Heading>Shopping Cart</Heading>
+            {seafoodList.length == 0 && <Empty>Cart is empty</Empty>}
             <ItemList>
                 {seafoodList.map((seafood) =>
                     <Item key={seafood.id}>
-                        <Image src={Image}/>
+                        <Image src={ImageBeta}/>
                         <Name>{seafood.name}</Name>
-                        <Counter onClick={() => (dispatch(increment(seafood)))}>-</Counter>
-                        <Number>{seafood.counter}</Number>
-                        <Counter onClick={() => (dispatch(decrement(seafood)))}>+</Counter>
-                        <Delete onClick={() => (remove(decrement(seafood)))}></Delete>
-                        <Price>{seafood.counter * seafood.price}</Price>
+                        <Quantity>
+                            <Counter onClick={() => (dispatch(decrement(seafood)))}>-</Counter>
+                            <Number>{seafood.counter}</Number>
+                            <Counter onClick={() => (dispatch(increment(seafood)))}>+</Counter>
+                        </Quantity>
+                        <Price>{seafood.counter * seafood.price}$</Price>
+                        <Delete onClick={() => (dispatch(remove(seafood)))}>x</Delete>
                     </Item>
                 )}
             </ItemList>
