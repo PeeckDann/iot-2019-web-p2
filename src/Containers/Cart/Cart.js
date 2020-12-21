@@ -41,7 +41,9 @@ const Cart = () => {
                 <Link to="/catalog">
                     <ToCatalog>Back to Catalog</ToCatalog>
                 </Link>
-                <Continue>Continue</Continue>
+                <Link to="/checkout">
+                    <Continue>Continue</Continue>
+                </Link>
             </BottomButtons>
         </Container>
     );

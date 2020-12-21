@@ -8,6 +8,8 @@ import Home from "../Home/Home.js";
 import Catalog from "../Catalog/Catalog.js";
 import Item from "../Item/Item.js";
 import Cart from "../Cart/Cart.js";
+import Checkout from "../Checkout/Checkout.js";
+import Success from "../Success/Success.js";
 import Footer from "./Footer/Footer.js";
 
 const App = () => {
@@ -26,6 +28,12 @@ const App = () => {
                 </Route>
                 <Route exact path="/cart">
                     <Cart/>
+                </Route>
+                <Route path="/checkout">
+                    <Checkout/>
+                </Route>
+                <Route path="/success">
+                    <Success/>
                 </Route>
             </Switch>
             <Footer/>
