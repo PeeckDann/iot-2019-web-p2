@@ -130,14 +130,14 @@ def get():
 @app.get('/seafood/{id}')
 def get_by_id(id):
     for seafood in seafood_list:
-        if seafood.id == id:
+        if seafood["id"] == int(id):
             return seafood
 
 
 @app.put('/seafood/{id}')
 def put(id, seafood: Seafood):
     for i in range(len(seafood_list)):
-        if seafood_list[i].id == id:
+        if seafood_list[i]["id"] == int(id):
             seafood_list[i] = seafood
             return
 
@@ -145,7 +145,7 @@ def put(id, seafood: Seafood):
 @app.delete('/seafood/{id}')
 def delete(id):
     for i in range(len(seafood_list)):
-        if seafood_list[i].id == id:
+        if seafood_list[i]["id"] == int(id):
             return seafood_list.pop(i)
 
 
