@@ -1,16 +1,16 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import "./App.css";
+import './App.css';
 
-import Header from "./Header/Header.js";
-import Home from "../Home/Home.js";
-import Catalog from "../Catalog/Catalog.js";
-import Item from "../Item/Item.js";
-import Cart from "../Cart/Cart.js";
-import Checkout from "../Checkout/Checkout.js";
-import Success from "../Success/Success.js";
-import Footer from "./Footer/Footer.js";
+import Header from './Header/Header';
+import Home from '../Home/Home';
+import Catalog from '../Catalog/Catalog';
+import Item from '../Item/Item';
+import Cart from '../Cart/Cart';
+import Checkout from '../Checkout/Checkout';
+import Success from '../Success/Success';
+import Footer from './Footer/Footer';
 
 const App = () => {
   return (

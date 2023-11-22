@@ -1,63 +1,91 @@
-import React, {useState} from "react";
-import {Container, Heading, HeadingImage, HeadingParagraph, Title, Text, Showcase, Tiles, Tile, TileImage, TileTitle, TileText, ViewMore, ContentContainer} from "./Home.styled.js";
-import HomeHeadingImage from "../Icons/HeadingImage.jpeg";
-import HomeTileImage from "../Icons/TileImage.jpeg";
-import HomeContentImage from "../Icons/HomeContentImage.jpeg";
+import React, { useState } from 'react';
+import {
+  Container,
+  Heading,
+  HeadingImage,
+  HeadingParagraph,
+  Title,
+  Text,
+  Showcase,
+  Tiles,
+  Tile,
+  TileImage,
+  TileTitle,
+  TileText,
+  ViewMore,
+  ContentContainer,
+} from './Home.styled.js';
+import HomeHeadingImage from '../Icons/HeadingImage.jpeg';
+import HomeTileImage from '../Icons/TileImage.jpeg';
+import HomeContentImage from '../Icons/HomeContentImage.jpeg';
 
+const TileData = [
+  {
+    image: HomeTileImage,
+    title: 'First Tile',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.',
+  },
+  {
+    image: HomeTileImage,
+    title: 'Second Tile',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.',
+  },
+  {
+    image: HomeTileImage,
+    title: 'Third Tile',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.',
+  },
+];
 
 const Home = () => {
+  const [toggle, setToggle] = useState(false);
 
-    const [toggle, setToggle] = useState(false);
+  const handleContent = () => setToggle(!toggle);
 
-    function handleContent(){
-        if (toggle == false) setToggle(true);
-        if (toggle == true) setToggle(false);
-    }
-
-    return (
-        <Container>
-            <Heading>
-                <HeadingImage src={HomeHeadingImage} alt="Image"></HeadingImage>
-                <HeadingParagraph>
-                    <Title>Heading</Title>
-                    <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.</Text>
-                </HeadingParagraph>
-            </Heading>
-            <Showcase>
-                <Tiles>
-                    <Tile>
-                        <TileImage src={HomeTileImage} alt="Image"></TileImage>
-                        <TileTitle>First Tile</TileTitle>
-                        <TileText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.</TileText>
-                    </Tile>
-                    <Tile>
-                        <TileImage src={HomeTileImage} alt="Image"></TileImage>
-                        <TileTitle>Second Tile</TileTitle>
-                        <TileText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.</TileText>
-                    </Tile>
-                    <Tile>
-                        <TileImage src={HomeTileImage} alt="Image"></TileImage>
-                        <TileTitle>Third Tile</TileTitle>
-                        <TileText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.</TileText>
-                    </Tile>
-                </Tiles>
-                {toggle && <MoreContent/>}
-                <ViewMore onClick={() => (handleContent())}>{toggle ? "View Less" : "View More"}</ViewMore>
-            </Showcase>
-        </Container>
-    );
+  return (
+    <Container>
+      <Heading>
+        <HeadingImage src={HomeHeadingImage} alt="Image" />
+        <HeadingParagraph>
+          <Title>Heading</Title>
+          <Text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae
+            maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae
+            maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.
+          </Text>
+        </HeadingParagraph>
+      </Heading>
+      <Showcase>
+        <Tiles>
+          {TileData.map((tile, index) => (
+            <Tile key={index}>
+              <TileImage src={tile.image} alt="Image" />
+              <TileTitle>{tile.title}</TileTitle>
+              <TileText>{tile.text}</TileText>
+            </Tile>
+          ))}
+        </Tiles>
+        {toggle && <MoreContent />}
+        <ViewMore onClick={handleContent}>{toggle ? 'View Less' : 'View More'}</ViewMore>
+      </Showcase>
+    </Container>
+  );
 };
 
-const MoreContent = () => {
-    return (
-        <ContentContainer>
-            <HeadingParagraph>
-                    <Title>Additional Info</Title>
-                    <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.</Text>
-            </HeadingParagraph>
-            <HeadingImage src={HomeContentImage} alt="Image"></HeadingImage>
-        </ContentContainer>
-    );
-};
+const MoreContent = () => (
+  <ContentContainer>
+    <HeadingParagraph>
+      <Title>Additional Info</Title>
+      <Text>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores
+        nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt
+        saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.
+      </Text>
+    </HeadingParagraph>
+    <HeadingImage src={HomeContentImage} alt="Image" />
+  </ContentContainer>
+);
 
 export default Home;

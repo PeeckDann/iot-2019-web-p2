@@ -1,38 +1,42 @@
+import React from 'react';
 import { Formik, Form, useField, ErrorMessage } from 'formik';
 import { Container, Heading, Buttons, Submit, GoBack, Field, Label, Input, Error } from './Checkout.styled.js';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
-function Checkout() {
-  const navigate = useNavigate();
+const initialValues = {
+  name: '',
+  surname: '',
+  email: '',
+  phone: '',
+  address: '',
+};
 
+const validationSchema = Yup.object({
+  name: Yup.string()
+    .min(3, 'Written name is too short')
+    .max(15, 'Written name is too long')
+    .matches('^[A-Z]+', 'Name should start with uppercase letter')
+    .required('This field is required'),
+  surname: Yup.string()
+    .min(3, 'Written surname is too short')
+    .max(15, 'Written surname is too long')
+    .matches('^[A-Z]+', 'Surname should start with uppercase letter')
+    .required('This field is required'),
+  email: Yup.string().email('Invalid email').required('This field is required'),
+  phone: Yup.string().matches('^[+\\d]\\d{8,11}', 'Invalid number').required('This field is required'),
+  address: Yup.string().optional(),
+});
+
+const CheckoutForm = ({ onSubmit }) => {
   return (
     <Formik
-      initialValues={{
-        name: '',
-        surname: '',
-        email: '',
-        phone: '',
-        address: '',
-      }}
-      validationSchema={Yup.object({
-        name: Yup.string()
-          .min(3, 'Written name is too short')
-          .max(15, 'Written name is too long')
-          .matches('^[A-Z]+', 'Name should start with uppercase letter')
-          .required('This field is required'),
-        surname: Yup.string()
-          .min(3, 'Written surname is too short')
-          .max(15, 'Written surname is too long')
-          .matches('^[A-Z]+', 'Surname should start with uppercase letter')
-          .required('This field is required'),
-        email: Yup.string().email('Invalid email').required('This field is required'),
-        phone: Yup.string().matches('^[+\\d]\\d{8,11}', 'Invalid number').required('This field is required'),
-        address: Yup.string().optional(),
-      })}
-      onSubmit={() => {
-        navigate('/success');
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={({ setSubmitting }) => {
+        onSubmit();
+        setSubmitting(false);
       }}
     >
       {(props) => (
@@ -48,16 +52,18 @@ function Checkout() {
               <Link to="/cart">
                 <GoBack>Go Back</GoBack>
               </Link>
-              <Submit type="submit">Continue</Submit>
+              <Submit type="submit" disabled={props.isSubmitting}>
+                Continue
+              </Submit>
             </Buttons>
           </Container>
         </Form>
       )}
     </Formik>
   );
-}
+};
 
-function CustomInput({ label, ...props }) {
+const CustomInput = ({ label, ...props }) => {
   const [field] = useField(props);
 
   return (
@@ -67,6 +73,16 @@ function CustomInput({ label, ...props }) {
       <ErrorMessage name={field.name}>{(error) => <Error>{error}</Error>}</ErrorMessage>
     </Field>
   );
-}
+};
+
+const Checkout = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate('/success');
+  };
+
+  return <CheckoutForm onSubmit={handleSubmit} />;
+};
 
 export default Checkout;

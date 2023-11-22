@@ -1,10 +1,19 @@
-from typing import Optional
-from fastapi import FastAPI
+from typing import List, Optional
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI()
-seafood_list = [{
+
+class Seafood(BaseModel):
+    id: Optional[int]
+    name: str
+    country: str
+    type: str
+    description: str
+    price: int
+
+seafood_list: List[Seafood] = [{
         "id": 1,
         "name": "Fish 1",
         "country": "Japan",
@@ -93,16 +102,6 @@ seafood_list = [{
         "price": 1023
     }]
 
-
-class Seafood(BaseModel):
-    id: Optional[str]
-    name: str
-    country: str
-    type: str
-    description: str
-    price: int
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -111,46 +110,40 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.post('/seafood')
 def post(seafood: Seafood):
-    temp_id = 1
-    while str(temp_id) in map(lambda i: i.id, seafood_list):
-        temp_id += 1
-    seafood.id = str(temp_id)
+    seafood["id"] = len(seafood_list) + 1
     seafood_list.append(seafood)
-    print(seafood_list)
+    return seafood
 
-
-@app.get('/seafood')
+@app.get('/seafood', response_model=List[Seafood])
 def get():
     return seafood_list
 
-
-@app.get('/seafood/{id}')
-def get_by_id(id):
+@app.get('/seafood/{id}', response_model=Seafood)
+def get_by_id(id: int):
     for seafood in seafood_list:
-        if seafood["id"] == int(id):
+        if seafood["id"] == id:
             return seafood
-
+    raise HTTPException(status_code=404, detail="Seafood not found")
 
 @app.put('/seafood/{id}')
-def put(id, seafood: Seafood):
-    for i in range(len(seafood_list)):
-        if seafood_list[i]["id"] == int(id):
+def put(id: int, seafood: Seafood):
+    for i, existing_seafood in enumerate(seafood_list):
+        if existing_seafood["id"] == id:
             seafood_list[i] = seafood
             return
+    raise HTTPException(status_code=404, detail="Seafood not found")
 
-
-@app.delete('/seafood/{id}')
-def delete(id):
-    for i in range(len(seafood_list)):
-        if seafood_list[i]["id"] == int(id):
+@app.delete('/seafood/{id}', response_model=Seafood)
+def delete(id: int):
+    for i, seafood in enumerate(seafood_list):
+        if seafood["id"] == id:
             return seafood_list.pop(i)
+    raise HTTPException(status_code=404, detail="Seafood not found")
 
-
-@app.get('/seafood/filters/{type}&{country}')
-def get_filtered(type, country):
-    return [i for i in seafood_list if
-    (type == 'None' or i.get('type', 'None') == type) and
-    (country == 'None' or i.get('country', 'None') == country)]
+@app.get('/seafood/filters/{type}&{country}', response_model=List[Seafood])
+def get_filtered(type: str, country: str):
+    return [seafood for seafood in seafood_list if
+            (type == 'None' or seafood.get('type', 'None') == type) and
+            (country == 'None' or seafood.get('country', 'None') == country)]
