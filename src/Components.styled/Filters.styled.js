@@ -23,6 +23,7 @@ export const Filters = styled.div`
   align-items: center;
   width: 30%;
   margin-left: 5%;
+  max-width: 450px;
 `;
 
 export const SearchContainer = styled.div`
@@ -32,6 +33,7 @@ export const SearchContainer = styled.div`
   justify-content: space-between;
   width: 30%;
   margin-right: 5%;
+  max-width: 400px;
 `;
 
 export const Input = styled.input`
