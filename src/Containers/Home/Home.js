@@ -13,11 +13,10 @@ import {
   TileTitle,
   TileText,
   ViewMore,
-  ContentContainer,
 } from './Home.styled.js';
 import HomeHeadingImage from '../Icons/HeadingImage.jpeg';
 import HomeTileImage from '../Icons/TileImage.jpeg';
-import HomeContentImage from '../Icons/HomeContentImage.jpeg';
+import AdditionalContent from './AdditionalContent.js';
 
 const TileData = [
   {
@@ -66,26 +65,11 @@ const Home = () => {
             </Tile>
           ))}
         </Tiles>
-        {toggle && <MoreContent />}
+        {toggle && <AdditionalContent />}
         <ViewMore onClick={handleContent}>{toggle ? 'View Less' : 'View More'}</ViewMore>
       </Showcase>
     </Container>
   );
 };
-
-const MoreContent = () => (
-  <ContentContainer>
-    <HeadingParagraph>
-      <Title>Additional Info</Title>
-      <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores
-        nesciunt saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis. Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Ab dicta possimus doloribus, labore enim quae maiores nesciunt
-        saepe voluptas, reprehenderit, sed quas vel. Quas maxime quo veritatis esse, quae nobis.
-      </Text>
-    </HeadingParagraph>
-    <HeadingImage src={HomeContentImage} alt="Image" />
-  </ContentContainer>
-);
 
 export default Home;

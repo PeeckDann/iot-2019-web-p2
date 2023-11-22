@@ -1,13 +1,7 @@
 import React from 'react';
-import { Container, LogoContainer, ShopName, ShopLogo, NavMenu, NavLink } from './Header.styled.js';
-import { Link } from 'react-router-dom';
+import { Container, LogoContainer, ShopName, ShopLogo, NavMenu } from './Header.styled.js';
 import ShopLogoIcon from '../../Icons/ShopLogo.svg';
-
-const HeaderLink = ({ to, children }) => (
-  <Link to={to}>
-    <NavLink>{children}</NavLink>
-  </Link>
-);
+import HeaderLink from './HeaderLink.js';
 
 const Header = () => (
   <Container>

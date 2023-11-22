@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { FilterContainer, Label, Filters, SearchContainer, Input, Search } from '../Components.styled/Filters.styled';
+import React from 'react';
+import { FilterContainer, Label, Filters } from '../Components.styled/Filters.styled';
 import CustomSelect from './Select';
+import SearchInput from './SearchInput';
 
 const FilterMenu = ({ type, country, search }) => {
   return (
@@ -12,25 +13,6 @@ const FilterMenu = ({ type, country, search }) => {
       </Filters>
       <SearchInput state={search} />
     </FilterContainer>
-  );
-};
-
-const SearchInput = ({ state: [searchQuery, setSearchQuery] }) => {
-  const [text, setText] = useState('');
-
-  const handleInputChange = (e) => {
-    setText(e.target.value);
-  };
-
-  const handleSearchClick = () => {
-    setSearchQuery(text);
-  };
-
-  return (
-    <SearchContainer>
-      <Input value={text} placeholder="Type something ..." onChange={handleInputChange} />
-      <Search onClick={handleSearchClick}>Search</Search>
-    </SearchContainer>
   );
 };
 
