@@ -31,14 +31,7 @@ const validationSchema = Yup.object({
 
 const CheckoutForm = ({ onSubmit }) => {
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={({ setSubmitting }) => {
-        onSubmit();
-        setSubmitting(false);
-      }}
-    >
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {(props) => (
         <Form>
           <Container>

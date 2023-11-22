@@ -1,4 +1,6 @@
-const itemReducer = (state = [], { type, payload }) => {
+const initialState = [];
+
+const itemReducer = (state = initialState, { type, payload }) => {
   let index = state.findIndex((item) => item.id === payload.id);
   switch (type) {
     case 'ADD':
@@ -21,6 +23,8 @@ const itemReducer = (state = [], { type, payload }) => {
     case 'REMOVE':
       state.splice(index, 1);
       return [...state];
+    case 'REMOVE_ALL':
+      return initialState;
     default:
       return state;
   }

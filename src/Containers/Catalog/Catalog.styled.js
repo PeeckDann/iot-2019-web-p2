@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  flex: 1;
 `;
 
 export const Products = styled.div`
@@ -13,6 +14,7 @@ export const Products = styled.div`
   flex-wrap: wrap;
   margin-top: 4%;
   width: 100%;
+  flex: 1;
 `;
 
 export const Product = styled.div`
@@ -26,7 +28,6 @@ export const Product = styled.div`
   margin-left: 4%;
   margin-bottom: 4%;
   width: 20%;
-  height: 40%;
   &::nth-child(4n) {
     background-color: white;
   }

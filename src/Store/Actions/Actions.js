@@ -12,6 +12,13 @@ export const remove = (payload) => {
   };
 };
 
+export const removeAll = () => {
+  return {
+    type: 'REMOVE_ALL',
+    payload: {},
+  };
+};
+
 export const increment = (payload) => {
   return {
     type: 'INCREMENT',
